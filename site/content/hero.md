@@ -14,8 +14,8 @@ Fields:
   set    home (top of the home page) or group (top of Members)
   src    path relative to site/
   alt    short description for screen readers and broken images
-  ratio  banner shape as width/height; all banners use 5/2 so page height
-         does not depend on which photo loads
+  ratio  banner shape as width/height. All photos in a set share one ratio so
+         page height does not depend on which photo loads: home 5/2, group 2/1
   focus  the point of the photo that stays visible when cropped to the
          banner, as "horizontal vertical" percentages (50% 50% = centre,
          50% 35% = keep the upper part). Faces should sit near the focus.
@@ -49,23 +49,23 @@ Fields:
 ## Members
 
 @photo{ set={group}, src={assets/images/group/dsc02274-1.jpg},
-  alt={The lab in lab coats}, ratio={5/2}, focus={50% 40%} }
+  alt={The lab in lab coats}, ratio={2/1}, focus={50% 65%} }
 
 @photo{ set={group}, src={assets/images/group/20251008-154847.jpg},
-  alt={Field collecting selfie}, ratio={5/2}, focus={50% 35%} }
+  alt={Field collecting selfie}, ratio={2/1}, focus={50% 30%} }
 
 @photo{ set={group}, src={assets/images/group/dsc01397.jpg},
-  alt={The lab on coastal rocks}, ratio={5/2}, focus={50% 35%} }
+  alt={The lab on coastal rocks}, ratio={2/1}, focus={50% 30%} }
 
 @photo{ set={group}, src={assets/images/group/dsc01443.jpg},
-  alt={Examining a vial in the field}, ratio={5/2}, focus={50% 30%} }
+  alt={Examining a vial in the field}, ratio={2/1}, focus={50% 30%} }
 
 @photo{ set={group}, src={assets/images/group/dsc01544.jpg},
-  alt={Sorting flies under a field microscope}, ratio={5/2}, focus={50% 40%} }
+  alt={Sorting flies under a field microscope}, ratio={2/1}, focus={50% 40%} }
 
 
 @photo{ set={group}, src={assets/images/group/dsc02278.jpg},
-  alt={The lab at the bench}, ratio={5/2}, focus={50% 40%} }
+  alt={The lab at the bench}, ratio={2/1}, focus={50% 35%} }
 
 @photo{ set={group}, src={assets/images/group/dsc02299.jpg},
-  alt={The lab with the Guyot Hall dinosaur}, ratio={5/2}, focus={50% 45%} }
+  alt={The lab with the Guyot Hall dinosaur}, ratio={2/1}, focus={50% 45%} }
