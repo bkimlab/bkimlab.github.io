@@ -57,6 +57,9 @@ by the emphasis rules, so underscores in links are fine.
 
     @member{..., photo={assets/images/people/x/y.jpg}, focus={50% 30%}}
                      # focus = which point of the photo stays in the 120x150 box
+                     # If content/hero.md has @photo{set={people/x}} entries for that
+                     # folder, the card rotates among them per load; photo= is the
+                     # no-JavaScript fallback.
 
 To add a new record type, write a `render_x(fields)` function in build.py and
 register it in `BLOCK_RENDERERS`.

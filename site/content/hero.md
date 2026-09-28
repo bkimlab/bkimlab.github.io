@@ -11,11 +11,13 @@ in photos/ by `python3 scripts/make_images.py` (lab_theme -> hero/,
 group_photos -> group/). Re-run it after adding photos, then add an entry.
 
 Fields:
-  set    home (top of the home page) or group (top of Members)
+  set    home (top of the home page), group (top of Members), or
+         people/<folder> (rotating profile photo for the @member whose photo=
+         lives in that folder; that photo= stays the no-JavaScript fallback)
   src    path relative to site/
   alt    short description for screen readers and broken images
   ratio  banner shape as width/height. All photos in a set share one ratio so
-         page height does not depend on which photo loads: home 5/2, group 2/1
+         page height does not depend on which photo loads (5/2 everywhere)
   focus  the point of the photo that stays visible when cropped to the
          banner, as "horizontal vertical" percentages (50% 50% = centre,
          50% 35% = keep the upper part). Faces should sit near the focus.
@@ -49,23 +51,35 @@ Fields:
 ## Members
 
 @photo{ set={group}, src={assets/images/group/dsc02274-1.jpg},
-  alt={The lab in lab coats}, ratio={2/1}, focus={50% 65%} }
+  alt={The lab in lab coats}, ratio={5/2}, focus={50% 60%} }
 
 @photo{ set={group}, src={assets/images/group/20251008-154847.jpg},
-  alt={Field collecting selfie}, ratio={2/1}, focus={50% 30%} }
+  alt={Field collecting selfie}, ratio={5/2}, focus={50% 20%} }
 
 @photo{ set={group}, src={assets/images/group/dsc01397.jpg},
-  alt={The lab on coastal rocks}, ratio={2/1}, focus={50% 30%} }
+  alt={The lab on coastal rocks}, ratio={5/2}, focus={50% 22%} }
 
 @photo{ set={group}, src={assets/images/group/dsc01443.jpg},
-  alt={Examining a vial in the field}, ratio={2/1}, focus={50% 30%} }
+  alt={Examining a vial in the field}, ratio={5/2}, focus={50% 30%} }
 
 @photo{ set={group}, src={assets/images/group/dsc01544.jpg},
-  alt={Sorting flies under a field microscope}, ratio={2/1}, focus={50% 40%} }
+  alt={Sorting flies under a field microscope}, ratio={5/2}, focus={50% 40%} }
 
 
 @photo{ set={group}, src={assets/images/group/dsc02278.jpg},
-  alt={The lab at the bench}, ratio={2/1}, focus={50% 35%} }
+  alt={The lab at the bench}, ratio={5/2}, focus={50% 28%} }
 
 @photo{ set={group}, src={assets/images/group/dsc02299.jpg},
-  alt={The lab with the Guyot Hall dinosaur}, ratio={2/1}, focus={50% 45%} }
+  alt={The lab with the Guyot Hall dinosaur}, ratio={5/2}, focus={50% 45%} }
+
+## People (profile photo pools; box is 120x150, so faces must read at that size)
+
+@photo{ set={people/santosrampasso_augusto}, src={assets/images/people/santosrampasso_augusto/dsc01661.jpg}, focus={50% 25%} }
+@photo{ set={people/santosrampasso_augusto}, src={assets/images/people/santosrampasso_augusto/dsc01852.jpg}, focus={70% 25%} }
+
+@photo{ set={people/berardi_skyler}, src={assets/images/people/berardi_skyler/dsc01320-2.jpg}, focus={35% 20%} }
+@photo{ set={people/berardi_skyler}, src={assets/images/people/berardi_skyler/dsc01303-2.jpg}, focus={42% 38%} }
+
+@photo{ set={people/wang_jocelyn}, src={assets/images/people/wang_jocelyn/dsc01890.jpg}, focus={68% 45%} }
+@photo{ set={people/wang_jocelyn}, src={assets/images/people/wang_jocelyn/dsc01186-2.jpg}, focus={50% 30%} }
+@photo{ set={people/wang_jocelyn}, src={assets/images/people/wang_jocelyn/dsc01324-2.jpg}, focus={50% 40%} }

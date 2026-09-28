@@ -16,7 +16,8 @@ Supported content syntax (see scripts/README.md for details):
     - or * bullet lists, 1. numbered lists
     **bold**, *italic*, _italic_, `code`, [text](url)
     ![alt](src) on its own line      -> full-width banner image
-    @member{name=, email=, bio=, photo=, focus=}
+    @member{name=, email=, bio=, photo=, focus=}   photo rotates if hero.md has
+                                                    @photo{set={people/<folder>}}
     @grant{title=, funder=, years=, role=, note=}
     any other @type{key, field={...}} -> BibTeX citation
     @selected{}  -> list of this page's records that carry selected={true}
@@ -207,8 +208,17 @@ def format_citation(fields):
     return f'<p class="pub">{citation.strip()}</p>'
 
 
-def render_member(fields):
-    """Member card. Email is plain text (no mailto) to reduce scraping."""
+_PEOPLE_DIR_RE = re.compile(r'(people/[^/]+)/')
+
+
+def render_member(fields, hero_photos=()):
+    """Member card. Email is plain text (no mailto) to reduce scraping.
+
+    photo= (with optional focus=) is the picture shown. If hero.md also has
+    @photo{set={people/<folder>}} entries for the folder that photo lives in,
+    one of those is chosen at random on each load, with photo= as the
+    no-JavaScript fallback.
+    """
     name = fields.get('name', '')
     photo = fields.get('photo', '')
     if photo:
@@ -217,6 +227,20 @@ def render_member(fields):
         style = f' style="object-position:{html.escape(focus)}"' if focus else ''
         img = (f'<img class="member-photo" src="{html.escape(photo)}" '
                f'alt="{html.escape(name)}" loading="lazy"{style}>')
+        m = _PEOPLE_DIR_RE.search(photo)
+        pool = [{'src': p['src'], 'focus': p['focus']}
+                for p in hero_photos if m and p['set'] == m.group(1)]
+        if pool:
+            el = 'photo-' + re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
+            data = json.dumps(pool, separators=(',', ':')).replace('</', '<\\/')
+            img = (f'<img id="{el}" class="member-photo" alt="{html.escape(name)}" hidden>'
+                   f'<noscript>{img}</noscript>'
+                   '<script>(function () {'
+                   f'var photos = {data};'
+                   'var p = photos[Math.floor(Math.random() * photos.length)];'
+                   f'var img = document.getElementById("{el}");'
+                   'img.src = p.src; img.style.objectPosition = p.focus; img.hidden = false;'
+                   '})();</script>')
     else:
         img = '<div class="image-placeholder">PHOTO</div>'
 
@@ -392,6 +416,8 @@ def md_to_html(text, hero_photos=()):
             elif kind == 'hero':
                 set_name = parse_bibtex(block).get('set', HERO_DEFAULT_SET).lower()
                 out.append(render_hero(hero_photos, set_name))
+            elif kind == 'member':
+                out.append(render_member(parse_bibtex(block), hero_photos))
             else:
                 renderer = BLOCK_RENDERERS.get(kind, format_citation)
                 out.append(renderer(parse_bibtex(block)))
