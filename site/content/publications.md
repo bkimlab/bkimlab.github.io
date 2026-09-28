@@ -1,7 +1,7 @@
 ---
 title: Publications
-subtitle: Our work.
-description: Preprints and peer-reviewed research.
+subtitle: Preprints and peer-reviewed research
+description: Preprints and peer-reviewed research
 ---
 # Publications
 
