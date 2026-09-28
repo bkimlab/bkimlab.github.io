@@ -1,7 +1,7 @@
 ---
 title: Publications
-subtitle: Peer-reviewed research
-description: Publications and preprints from Bernard Y. Kim and the Kim Lab, Princeton EEB.
+subtitle: Our work.
+description: Preprints and peer-reviewed research.
 ---
 # Publications
 

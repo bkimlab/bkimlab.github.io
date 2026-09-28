@@ -1,15 +1,15 @@
 ---
 title: Our Research
-subtitle: Computational Biology & Evolutionary Genomics
+subtitle: Clade-scale genomics of Drosophilidae
 description: Clade-scale genomics of Drosophilidae
 ---
 # Research
 
 ## Overview
-We study how evolution shapes genomes, from single amino acids to entire evolutionary radiations, using clade-scale sequencing of Drosophilidae. Our work is deliberately end-to-end: we collect flies in the field (and collaborate extensively with local experts), generate genomic data, and build the computational methods needed to analyze thousands of genomes at once. Most of our work uses the dipteran family Drosophilidae, where we can connect broad sequencing to a century of *Drosophila melanogaster* genetics. Small genomes and high genetic diversity currently make it one of the few clades where population genomics at the scale of a whole lineage is feasible.
+We study how evolution shapes genomes, from single amino acids to entire evolutionary radiations, using clade-scale genome sequencing. Our work is deliberately end-to-end: we collect flies in the field (and collaborate extensively with local experts), generate genomic data, and build the computational methods needed to analyze thousands of genomes at once. Our work currently focuses on the dipteran family Drosophilidae, where we can connect broad sequencing efforts to a century of *Drosophila melanogaster* genetics. Small genomes and high genetic diversity currently make it one of the few systems where population genomics at the scale of a whole lineage is feasible.
 
 ## From Model Species to Model Clade
-We are part of an international effort to sequence every drosophilid species. By developing inexpensive approaches to assembling high-quality genomes from single flies, we've cut the cost of a reference genome to a few hundred dollars, allowing us to release hundreds of genomes. We are working on hundreds (hopefully thousands) more. Combined with lab automation for low-cost population resequencing, the result is a growing atlas of reference genomes and polymorphism data at comparable scales across the clade. This provides us with tools and resources to support our own projects, but also open resources for the field.
+We are part of an international effort to sequence every drosophilid species. By developing inexpensive approaches to assembling high-quality genomes from single flies, we've cut the cost of a reference genome to a few hundred dollars, allowing us to release hundreds of genomes. We are working on hundreds (eventually thousands) more. Combined with lab automation for low-cost population resequencing, the result is a growing atlas of reference genomes and polymorphism data at comparable scales across the clade. This provides us with tools and resources to support our own projects, but releasing open resources to share with our community is field a top priority.
 
 * Single-fly long-read (Nanopore) genome assembly and chromosome-scale scaffolding.
 * Comparative annotation and orthology across hundreds of species.
@@ -18,7 +18,7 @@ We are part of an international effort to sequence every drosophilid species. By
 * Low-cost species identification with genome skimming.
 
 ## Natural Selection at Amino-Acid Resolution
-Polymorphisms are sparse within any one species, so classic population genetic estimates of purifying selection average over many thousands of sites and obscure the details of how selection acts in connection to function. We take an evolutionary replication approach that pools polymorphisms across orthologous positions in many species. With 150+ species, at least one nonsynonymous variant exists for nearly every neutral residue (codon), allowing us to study natural selection precisely with population genomic data.
+Polymorphisms are sparse within any one species, so classic population genetic estimates of purifying selection average over many thousands of sites and obscure the details of how selection acts in connection to function. We take an evolutionary replication approach that pools polymorphisms across orthologous positions in many species. With 150+ species, at least one nonsynonymous variant exists for nearly every neutral residue (codon) of an ortholog, allowing us to study natural selection very precisely with population genomic data.
 
 We are building hierarchical Bayesian models that estimate the distribution of fitness effects (DFE) jointly across across 3D protein structures, genes, to lineages. This lets us ask where in a protein constraint and adaptation occur, connect those maps to biochemistry and function, and ultimately to test them against computational predictions of fitness effects or experimental measurements of enzyme activity.
 
