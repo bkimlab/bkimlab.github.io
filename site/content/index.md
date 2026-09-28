@@ -4,6 +4,8 @@ subtitle: Comparative population genomics of Drosophilidae and beyond
 description: The Kim Lab at Princeton EEB.
 ---
 # Home
+@hero{set=home}
+
 Welcome to the Kim Lab!
 
 ## Introduction

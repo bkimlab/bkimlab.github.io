@@ -50,9 +50,13 @@ by the emphasis rules, so underscores in links are fine.
     @selected{}    # on its own line: lists every record in this file that has
                    # selected={true}, in file order (used for "Selected Publications")
 
-    @hero{}        # on its own line (Home): banner showing one photo chosen at
-                   # random on each load, from the @photo{} list in content/hero.md.
-                   # This is the site's only JavaScript; <noscript> shows the first photo.
+    @hero{set=home}  # on its own line: banner showing one photo of the named set,
+                     # chosen at random on each load, from content/hero.md.
+                     # Sets: home (Home page), group (Members). This is the site's
+                     # only JavaScript; <noscript> shows the set's first photo.
+
+    @member{..., photo={assets/images/people/x/y.jpg}, focus={50% 30%}}
+                     # focus = which point of the photo stays in the 120x150 box
 
 To add a new record type, write a `render_x(fields)` function in build.py and
 register it in `BLOCK_RENDERERS`.
@@ -60,6 +64,13 @@ register it in `BLOCK_RENDERERS`.
 ## Themes
 `STYLESHEETS` in build.py: `base.css` (layout) plus one theme file.
 `theme-refined.css` is the default. `theme-mono.css` is the original all-Courier look.
+
+## Photos
+Originals live in `photos/<folder>/` at the repo root (gitignored: large,
+and phone photos carry GPS). `python3 scripts/make_images.py` writes web
+copies with metadata stripped into `assets/images/`: `lab_theme/` -> `hero/`,
+`group_photos/` -> `group/`, any other folder -> `people/<folder>/`. Commit
+the copies. Then reference them from `content/hero.md` or an `@member{}`.
 
 ## Favicon
 `assets/favicon.svg` is a 16x16 pixel-art Drosophila drawn from
