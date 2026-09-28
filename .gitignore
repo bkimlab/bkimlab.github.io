@@ -1,5 +1,8 @@
 # Unpublished grant proposals: source material only, never deploy or commit.
 grants/
+# Working notes, local only.
+lab_website_agent.md
+REFACTOR_PROPOSALS.md
 __pycache__/
 *.pyc
 .DS_Store
