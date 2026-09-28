@@ -76,10 +76,16 @@ Fields:
 
 @photo{ set={people/santosrampasso_augusto}, src={assets/images/people/santosrampasso_augusto/dsc01661.jpg}, focus={50% 25%} }
 @photo{ set={people/santosrampasso_augusto}, src={assets/images/people/santosrampasso_augusto/dsc01852.jpg}, focus={70% 25%} }
+@photo{ set={people/santosrampasso_augusto}, src={assets/images/people/santosrampasso_augusto/20260307-132851.jpg}, focus={70% 20%} }
+@photo{ set={people/santosrampasso_augusto}, src={assets/images/people/santosrampasso_augusto/dsc01348-2.jpg}, focus={50% 45%} }
+@photo{ set={people/santosrampasso_augusto}, src={assets/images/people/santosrampasso_augusto/dsc01548-2.jpg}, focus={50% 30%} }
+@photo{ set={people/santosrampasso_augusto}, src={assets/images/people/santosrampasso_augusto/dsc01840.jpg}, focus={15% 50%} }
 
 @photo{ set={people/berardi_skyler}, src={assets/images/people/berardi_skyler/dsc01320-2.jpg}, focus={35% 20%} }
 @photo{ set={people/berardi_skyler}, src={assets/images/people/berardi_skyler/dsc01303-2.jpg}, focus={42% 38%} }
+@photo{ set={people/berardi_skyler}, src={assets/images/people/berardi_skyler/dsc01242.jpg}, focus={55% 35%} }
 
 @photo{ set={people/wang_jocelyn}, src={assets/images/people/wang_jocelyn/dsc01890.jpg}, focus={68% 45%} }
 @photo{ set={people/wang_jocelyn}, src={assets/images/people/wang_jocelyn/dsc01186-2.jpg}, focus={50% 30%} }
 @photo{ set={people/wang_jocelyn}, src={assets/images/people/wang_jocelyn/dsc01324-2.jpg}, focus={50% 40%} }
+@photo{ set={people/wang_jocelyn}, src={assets/images/people/wang_jocelyn/dsc01970.jpg}, focus={25% 30%} }
