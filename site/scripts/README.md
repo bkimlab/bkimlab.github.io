@@ -50,6 +50,10 @@ by the emphasis rules, so underscores in links are fine.
     @selected{}    # on its own line: lists every record in this file that has
                    # selected={true}, in file order (used for "Selected Publications")
 
+    @hero{}        # on its own line (Home): banner showing one photo chosen at
+                   # random on each load, from the @photo{} list in content/hero.md.
+                   # This is the site's only JavaScript; <noscript> shows the first photo.
+
 To add a new record type, write a `render_x(fields)` function in build.py and
 register it in `BLOCK_RENDERERS`.
 

@@ -178,6 +178,15 @@ hr {
     margin: 0 0 30px;
 }
 
+/* Rotating home banner; per-photo ratio and focus are set inline */
+.hero {
+    margin: 0 0 30px;
+}
+
+.hero .banner {
+    margin: 0;
+}
+
 /* Members */
 .member-card {
     margin-bottom: 30px;
