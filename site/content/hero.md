@@ -1,7 +1,9 @@
 # Home-page banner photos
 
-One @photo per image. Every page load picks one at random; the first entry is
-also the fallback for visitors without JavaScript. This file is not a page.
+This file is not displayed as a page.
+
+One @photo per image. Every page load picks one at random. The first entry is
+also the fallback for visitors without JavaScript. 
 
 Fields:
   src    path relative to site/, e.g. assets/images/hero/field-maui.jpg

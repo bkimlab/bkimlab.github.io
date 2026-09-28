@@ -11,25 +11,38 @@ description: Current members of the Kim Lab in Ecology and Evolutionary Biology 
 @member{
   name={Bernard Y. Kim},
   email={bernardkim [at] princeton -dot- edu},
-  bio={Principal Investigator. I combine fieldwork, genome sequencing at the bench, and computational biology to study evolutionary genomics, comparative genomics, and natural selection across the tree of life.}
+  bio={Principal Investigator.}
 }
 
-## Postdoctoral Fellows
+## Postdocs
 @member{
   name={Augusto Santos Rampasso},
   email={asrampasso [at] example -dot- edu},
-  bio={Research interests include [Enter research description here, e.g., the development of scalable algorithms for large-scale genomic datasets].}
+  bio={.}
 }
 
 @member{
   name={Skyler Berardi},
   email={sberardi [at] example -dot- edu},
-  bio={Research interests include [Enter research description here, e.g., the intersection of population genetics and machine learning].}
+  bio={.}
 }
 
 ## Graduate Students
 @member{
   name={Jocelyn Wang},
   email={jwang [at] example -dot- edu},
-  bio={Research interests include [Enter research description here, e.g., phylogenomic reconstruction of island species].}
+  bio={.}
+}
+
+## Collaborators
+While we have many ongoing collaborations, major lab projects.
+
+@member{
+  name={Thomas Werner},
+  bio={.}
+}
+
+@member{
+  name={Samuel H. Church},
+  bio={.}
 }

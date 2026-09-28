@@ -5,9 +5,6 @@ description: Publications and preprints from Bernard Y. Kim and the Kim Lab, Pri
 ---
 # Publications
 
-## Selected Publications
-@selected{}
-
 ## Preprints and Publications
 
 ### 2026
