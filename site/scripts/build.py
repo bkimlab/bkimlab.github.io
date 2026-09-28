@@ -28,6 +28,7 @@ import html
 import http.server
 import os
 import re
+import subprocess
 import sys
 import threading
 import time
@@ -367,9 +368,24 @@ def render_nav(current):
 
 
 def last_updated(content_dir):
-    """Date of the most recently modified content file (not the build time)."""
+    """Date the content was last changed, not the build time.
+
+    Prefers the last git commit touching content/, so CI builds (where every
+    checked-out file has today's mtime) show the real edit date. Falls back to
+    file mtimes when git is unavailable or the content has uncommitted edits.
+    """
     mtimes = [os.path.getmtime(os.path.join(content_dir, f))
               for f in os.listdir(content_dir) if f.endswith('.md')]
+    try:
+        dirty = subprocess.run(['git', 'status', '--porcelain', '--', content_dir],
+                               capture_output=True, text=True, check=True).stdout.strip()
+        if not dirty:
+            out = subprocess.run(['git', 'log', '-1', '--format=%cs', '--', content_dir],
+                                 capture_output=True, text=True, check=True).stdout.strip()
+            if out:
+                return datetime.date.fromisoformat(out)
+    except (OSError, subprocess.CalledProcessError, ValueError):
+        pass
     return datetime.date.fromtimestamp(max(mtimes)) if mtimes else datetime.date.today()
 
 

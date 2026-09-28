@@ -1,0 +1,60 @@
+# Build the site from Markdown and publish site/ to GitHub Pages.
+#
+# One-time setup in the GitHub repo: Settings -> Pages -> Source: "GitHub Actions".
+# After that, every push to the default branch that touches the site rebuilds
+# and redeploys. Only site/ is published; grants/ and the notes never are.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history so build.py can date pages from git
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build HTML from Markdown
+        run: python3 site/scripts/build.py
+
+      - name: Warn if committed HTML was stale
+        # Informational only: the deployed copy is always freshly built above.
+        # A mismatch just means the .md was edited (e.g. on github.com) without
+        # rebuilding locally, which is fine. Look here if a page seems off.
+        run: |
+          git diff --quiet -- 'site/*.html' \
+            || echo "::warning::Committed HTML did not match the Markdown; deployed the fresh build. Run scripts/build.py locally and commit."
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
