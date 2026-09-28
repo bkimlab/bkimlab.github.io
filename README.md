@@ -2,7 +2,7 @@
 
 Source for the Kim Lab (Princeton EEB) website. Pages are written in Markdown
 and compiled to plain HTML/CSS by a small Python script; no JavaScript,
-frameworks, or trackers. Published with GitHub Pages.
+frameworks, or trackers. Published with GitHub Pages at https://bkimlab.github.io/.
 
 ## Editing a page
 
