@@ -5,6 +5,16 @@ generated `*.html` directly; `python3 scripts/build.py --check` exits 1 if any
 page is out of date. `--serve [PORT]` builds and serves on 127.0.0.1
 (use `--bind 0.0.0.0` to expose it on the network).
 
+While editing, leave this running and just refresh the browser after saving:
+
+    python3 scripts/build.py --watch --serve
+
+`--watch` rebuilds whenever a `content/*.md` file is saved, added, or removed.
+It polls file timestamps every `--interval` seconds (default 1) because
+inotify does not work under WSL for files on Windows drives or synced by
+Dropbox. A half-saved file with a syntax error is reported and skipped; the
+next good save rebuilds. Changes to `build.py` itself need a restart.
+
 ## Front matter (optional, first lines of the file)
     ---
     title: Our Research            # <title> tag; default is the nav label

@@ -8,6 +8,7 @@ Usage (from anywhere):
     python3 scripts/build.py --check      # exit 1 if any built page is stale
     python3 scripts/build.py --serve      # build, then serve on 127.0.0.1:8000
     python3 scripts/build.py --serve 9000 --bind 0.0.0.0
+    python3 scripts/build.py --watch --serve   # rebuild on every .md save
 
 Supported content syntax (see scripts/README.md for details):
     optional front matter between `---` lines (title, subtitle, description)
@@ -28,6 +29,8 @@ import http.server
 import os
 import re
 import sys
+import threading
+import time
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -399,10 +402,16 @@ def render_site(root):
 
 
 def write_site(root, pages):
+    """Write only pages whose HTML changed, so Dropbox/git see minimal churn."""
+    stale = set(check_site(root, pages))
     for name, text in pages.items():
+        if name not in stale:
+            continue
         with open(os.path.join(root, name), 'w', encoding='utf-8') as f:
             f.write(text)
-        print(f'built {name}')
+        print(f'built {name}', flush=True)
+    if not stale:
+        print('up to date', flush=True)
 
 
 def check_site(root, pages):
@@ -419,14 +428,60 @@ def check_site(root, pages):
     return stale
 
 
-def serve(root, port, bind):
+def serve(root, port, bind, block=True):
     handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=root)
-    with http.server.ThreadingHTTPServer((bind, port), handler) as httpd:
-        print(f'serving {root} at http://{bind}:{port}/  (Ctrl+C to stop)', flush=True)
+    httpd = http.server.ThreadingHTTPServer((bind, port), handler)
+    print(f'serving {root} at http://{bind}:{port}/', flush=True)
+    if not block:
+        threading.Thread(target=httpd.serve_forever, daemon=True).start()
+        return httpd
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print('\nstopped')
+    finally:
+        httpd.server_close()
+
+
+def content_snapshot(content_dir):
+    """{filename: (mtime, size)} for every .md file in content/."""
+    snap = {}
+    for name in os.listdir(content_dir):
+        if name.endswith('.md'):
+            st = os.stat(os.path.join(content_dir, name))
+            snap[name] = (st.st_mtime_ns, st.st_size)
+    return snap
+
+
+def build_once(root):
+    """Render and write the site; report errors instead of raising."""
+    try:
+        write_site(root, render_site(root))
+    except (ValueError, OSError) as err:
+        # Usually a half-saved file (e.g. unbalanced braces); fixed on next save.
+        print(f'build failed: {err}', file=sys.stderr, flush=True)
+
+
+def watch(root, interval):
+    """Rebuild whenever a content/*.md file is added, removed, or modified.
+
+    Polls timestamps rather than using inotify, which does not fire under WSL
+    for files on Windows drives (/mnt/*) edited from Windows or synced by Dropbox.
+    """
+    content_dir = os.path.join(root, 'content')
+    last = content_snapshot(content_dir)
+    print(f'watching {content_dir} every {interval}s (Ctrl+C to stop)', flush=True)
+    while True:
+        time.sleep(interval)
         try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print('\nstopped')
+            now = content_snapshot(content_dir)
+        except OSError:
+            continue  # directory briefly unavailable mid-sync
+        if now != last:
+            changed = sorted(n for n in now.keys() | last.keys() if now.get(n) != last.get(n))
+            print(f'[{time.strftime("%H:%M:%S")}] changed: {", ".join(changed)}', flush=True)
+            last = now
+            build_once(root)
 
 
 def main(argv=None):
@@ -437,10 +492,28 @@ def main(argv=None):
                         help='build, then serve the site locally (default port 8000)')
     parser.add_argument('--bind', default='127.0.0.1',
                         help='address for --serve (default 127.0.0.1)')
+    parser.add_argument('--watch', action='store_true',
+                        help='rebuild whenever a content/*.md file changes')
+    parser.add_argument('--interval', type=float, default=1.0, metavar='SECONDS',
+                        help='polling interval for --watch (default 1)')
     args = parser.parse_args(argv)
 
     # Site root is the parent of this script's directory.
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    if args.watch:
+        build_once(root)
+        httpd = serve(root, args.serve, args.bind, block=False) if args.serve else None
+        try:
+            watch(root, args.interval)
+        except KeyboardInterrupt:
+            print('\nstopped')
+        finally:
+            if httpd:
+                httpd.shutdown()
+                httpd.server_close()
+        return 0
+
     pages = render_site(root)
 
     if args.check:
