@@ -47,6 +47,9 @@ by the emphasis rules, so underscores in links are fine.
 
     @grant{title={...}, funder={...}, years={2026-2029}, role={PI}, note={...}}
 
+    @selected{}    # on its own line: lists every record in this file that has
+                   # selected={true}, in file order (used for "Selected Publications")
+
 To add a new record type, write a `render_x(fields)` function in build.py and
 register it in `BLOCK_RENDERERS`.
 

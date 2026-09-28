@@ -34,7 +34,7 @@ body {
 }
 
 #container {
-    max-width: 800px;
+    max-width: 720px;   /* ~75-80 characters per line of body text */
     margin: 0 auto;
     background-color: #fff;
     border: var(--frame);
@@ -50,18 +50,23 @@ header {
 
 h1 {
     font-family: var(--head-font);
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 700;
     color: #000;
     margin: 0;
-    text-transform: uppercase;
-    letter-spacing: -1px;
+}
+
+.affiliation {
+    font-family: var(--head-font);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 2px 0 0;
 }
 
 .subtitle {
     font-style: italic;
     color: var(--muted);
-    margin-top: 6px;
+    margin: 10px 0 0;
 }
 
 /* Navigation */
@@ -81,12 +86,18 @@ nav a {
     text-decoration: none;
     color: var(--accent);
     font-weight: bold;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
 }
 
-nav a:hover,
-nav a.current {
+nav a:hover {
     text-decoration: underline;
     background-color: var(--highlight);
+}
+
+nav a.current {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
 }
 
 /* Headings */
@@ -101,8 +112,8 @@ nav a.current {
 .subsection-head {
     font-family: var(--head-font);
     font-size: 1.05rem;
-    color: var(--accent);
-    margin: 26px 0 6px;
+    color: #000;
+    margin: 34px 0 10px;
 }
 
 /* Body copy */

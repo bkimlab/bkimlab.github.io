@@ -5,6 +5,9 @@ description: Publications and preprints from Bernard Y. Kim and the Kim Lab, Pri
 ---
 # Publications
 
+## Selected Publications
+@selected{}
+
 ## Preprints and Publications
 
 ### 2026
@@ -127,6 +130,7 @@ description: Publications and preprints from Bernard Y. Kim and the Kim Lab, Pri
 }
 
 @article{kim2024single,
+  selected={true},
   title={Single-fly genome assemblies fill major phylogenomic gaps across the Drosophilidae Tree of Life},
   author={Kim, BY and Gellert, HR and Church, SH and Suvorov, A and Anderson, SS and Barmina, O and others},
   journal={PLoS Biology},
@@ -235,6 +239,7 @@ description: Publications and preprints from Bernard Y. Kim and the Kim Lab, Pri
 }
 
 @article{suvorov2022widespread,
+  selected={true},
   title={Widespread introgression across a phylogeny of 155 Drosophila genomes},
   author={Suvorov, A and Kim, BY and Wang, J and Armstrong, EE and Peede, D and D'agostino, ERR and others},
   journal={Current Biology},
@@ -256,6 +261,7 @@ description: Publications and preprints from Bernard Y. Kim and the Kim Lab, Pri
 }
 
 @article{kim2021highly,
+  selected={true},
   title={Highly contiguous assemblies of 101 drosophilid genomes},
   author={Kim, BY and Wang, JR and Miller, DE and Barmina, O and Delaney, E and Thompson, A and others},
   journal={Elife},
@@ -335,6 +341,7 @@ description: Publications and preprints from Bernard Y. Kim and the Kim Lab, Pri
 }
 
 @article{kim2018deleterious,
+  selected={true},
   title={Deleterious variation shapes the genomic landscape of introgression},
   author={Kim, BY and Huber, CD and Lohmueller, KE},
   journal={PLoS Genetics},
@@ -346,6 +353,7 @@ description: Publications and preprints from Bernard Y. Kim and the Kim Lab, Pri
 
 ### 2017
 @article{kim2017inference,
+  selected={true},
   title={Inference of the distribution of selection coefficients for new nonsynonymous mutations using large samples},
   author={Kim, BY and Huber, CD and Lohmueller, KE},
   journal={Genetics},

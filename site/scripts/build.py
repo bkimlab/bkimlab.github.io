@@ -19,6 +19,7 @@ Supported content syntax (see scripts/README.md for details):
     @member{name=, email=, bio=, photo=}
     @grant{title=, funder=, years=, role=, note=}
     any other @type{key, field={...}} -> BibTeX citation
+    @selected{}  -> list of this page's records that carry selected={true}
 """
 
 import argparse
@@ -37,8 +38,8 @@ import time
 # Configuration
 # ---------------------------------------------------------------------------
 
-SITE_TITLE = 'The Kim Lab @ Princeton EEB'
-OWNER = 'Bernard Y. Kim'
+SITE_TITLE = 'The Kim Lab'
+AFFILIATION = 'Ecology &amp; Evolutionary Biology &middot; Princeton University'
 PI_SURNAME = 'Kim'             # bolded in author lists
 
 # base.css holds layout; the theme file holds fonts and colors only.
@@ -236,6 +237,30 @@ BLOCK_RENDERERS = {
     'grant': render_grant,
 }
 
+_BLOCK_RE = re.compile(r'^@(\w+)\{', re.MULTILINE)
+
+
+def collect_blocks(text):
+    """Yield (kind, record_text) for every @type{...} block in a document."""
+    for m in _BLOCK_RE.finditer(text):
+        try:
+            _, end = _read_braced(text, m.end() - 1)
+        except ValueError:
+            continue
+        yield m.group(1).lower(), text[m.start():end]
+
+
+def render_selected(text):
+    """Citations for records marked selected={true}, in document order."""
+    out = []
+    for kind, block in collect_blocks(text):
+        if kind in BLOCK_RENDERERS or kind == 'selected':
+            continue
+        fields = parse_bibtex(block)
+        if fields.get('selected', '').lower() in ('true', 'yes', '1'):
+            out.append(format_citation(fields))
+    return '\n'.join(out)
+
 
 # ---------------------------------------------------------------------------
 # Front matter and block-level Markdown
@@ -261,6 +286,7 @@ def md_to_html(text):
     lines = text.split('\n')
     out = []
     list_type = None  # None | 'ul' | 'ol'
+    selected_html = None  # rendered lazily, only if the page uses @selected{}
 
     def close_list():
         nonlocal list_type
@@ -292,12 +318,17 @@ def md_to_html(text):
                 block += '\n' + lines[i]
                 depth += lines[i].count('{') - lines[i].count('}')
             kind = re.match(r'@(\w+)', line).group(1).lower()
-            renderer = BLOCK_RENDERERS.get(kind, format_citation)
-            out.append(renderer(parse_bibtex(block)))
+            if kind == 'selected':
+                if selected_html is None:
+                    selected_html = render_selected(text)
+                out.append(selected_html)
+            else:
+                renderer = BLOCK_RENDERERS.get(kind, format_citation)
+                out.append(renderer(parse_bibtex(block)))
         elif m := re.match(r'^!\[([^\]]*)\]\(([^)]+)\)\s*$', line):
             close_list()
             alt, src = html.escape(m.group(1)), html.escape(m.group(2))
-            out.append(f'<img class="banner" src="{src}" alt="{alt}" loading="lazy">')
+            out.append(f'<img class="banner" src="{src}" alt="{alt}">')
         elif line.startswith('# '):
             close_list()  # page H1 comes from the template
         elif line.startswith('### '):
@@ -332,13 +363,15 @@ TEMPLATE = """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{description}">
-    <title>{title} | {site_title}</title>
+    <title>{title} | {site_title}, Princeton EEB</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 {stylesheets}
 </head>
 <body>
     <div id="container">
         <header>
             <h1>{site_title}</h1>
+            <p class="affiliation">{affiliation}</p>
             <p class="subtitle">{subtitle}</p>
             <nav>
                 <ul>
@@ -351,7 +384,7 @@ TEMPLATE = """<!DOCTYPE html>
         </main>
         <footer>
             <hr>
-            <p>&copy; {year} {owner}. Last updated: {updated}.</p>
+            <p>{site_title}, Princeton EEB &middot; updated {updated}</p>
         </footer>
     </div>
 </body>
@@ -405,13 +438,12 @@ def render_site(root):
             mark=GENERATED_MARK.format(page=page),
             title=html.escape(meta.get('title', label)),
             site_title=html.escape(SITE_TITLE),
+            affiliation=AFFILIATION,
             subtitle=html.escape(meta.get('subtitle', DEFAULT_SUBTITLE)),
             description=html.escape(meta.get('description', DEFAULT_DESCRIPTION)),
             stylesheets=stylesheets,
             nav=render_nav(page),
             content=md_to_html(body),
-            year=updated.year,
-            owner=html.escape(OWNER),
             updated=f'{updated:%B} {updated.day}, {updated.year}',
         )
     return pages
