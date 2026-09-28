@@ -1,0 +1,7 @@
+# Unpublished grant proposals: source material only, never deploy or commit.
+grants/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
