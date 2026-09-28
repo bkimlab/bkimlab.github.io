@@ -60,3 +60,11 @@ register it in `BLOCK_RENDERERS`.
 ## Themes
 `STYLESHEETS` in build.py: `base.css` (layout) plus one theme file.
 `theme-refined.css` is the default. `theme-mono.css` is the original all-Courier look.
+
+## Favicon
+`assets/favicon.svg` is a 16x16 pixel-art Drosophila drawn from
+`scripts/favicon_map.txt` (one character per pixel: `B` body, `D` dark
+stripe, `E` eye, `W` wing, `L` leg, `.` background). To change it, edit the
+map and regenerate:
+
+    python3 scripts/make_favicon.py
