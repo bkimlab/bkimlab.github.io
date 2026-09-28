@@ -63,8 +63,6 @@ Fields:
 @photo{ set={group}, src={assets/images/group/dsc01544.jpg},
   alt={Sorting flies under a field microscope}, ratio={5/2}, focus={50% 40%} }
 
-@photo{ set={group}, src={assets/images/group/dsc01664.jpg},
-  alt={Lab dinner}, ratio={5/2}, focus={50% 45%} }
 
 @photo{ set={group}, src={assets/images/group/dsc02278.jpg},
   alt={The lab at the bench}, ratio={5/2}, focus={50% 40%} }
