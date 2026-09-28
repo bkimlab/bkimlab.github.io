@@ -1,37 +1,33 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
-
 /*
-   Classic-Refined theme for the Kim Lab site.
+   Kim Lab site: shared layout.
 
-   Keeps the austere, framed, monospace-leaning identity of the original
-   (style.css) but makes a few deliberate, signature choices so the site reads
-   as "this lab, hand-built" rather than a generic retro template:
-     1. Type: JetBrains Mono for headings / nav / marks, a readable serif for
-        body text and the long publication list (mono-as-accent, not mono-for-
-        everything).
-     2. Palette: unchanged — the original blue (#0044cc) links and yellow
-        (#ffffcc) highlight.
-     3. The retro offset drop-shadow on the container is dropped.
-
-   Fully self-contained. To revert to the original monospace theme, set
-   STYLESHEET = 'style.css' in scripts/build.py, point members.html's <link>
-   back to css/style.css, and rebuild. style.css is left untouched.
+   All colors and fonts are CSS variables set by a theme file loaded after this
+   one (theme-refined.css or theme-mono.css). Choose the theme in
+   scripts/build.py (STYLESHEETS). No external requests: fonts are local stacks.
 */
 
 :root {
-    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-    --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, "Times New Roman", serif;
+    /* Defaults; themes override. */
+    --body-font: Georgia, serif;
+    --head-font: ui-monospace, Menlo, Consolas, monospace;
     --accent: #0044cc;
     --highlight: #ffffcc;
     --paper: #f4f4f2;
     --ink: #2b2b2b;
+    --muted: #666;
+    --frame: 1px solid #bbb;
+    --shadow: none;
+    --tag-ink: var(--accent);
+    --tag-bg: var(--highlight);
+    --tag-border: var(--accent);
 }
 
+/* Page frame */
 body {
     background-color: var(--paper);
     color: var(--ink);
-    font-family: var(--serif);
+    font-family: var(--body-font);
     line-height: 1.6;
     margin: 0;
     padding: 20px;
@@ -41,7 +37,8 @@ body {
     max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
-    border: 1px solid #bbb;   /* thin frame; the retro offset shadow is dropped */
+    border: var(--frame);
+    box-shadow: var(--shadow);
     padding: 30px 40px 40px;
 }
 
@@ -52,7 +49,7 @@ header {
 }
 
 h1 {
-    font-family: var(--mono);
+    font-family: var(--head-font);
     font-size: 1.8rem;
     font-weight: 700;
     color: #000;
@@ -62,23 +59,21 @@ h1 {
 }
 
 .subtitle {
-    font-family: var(--serif);
     font-style: italic;
-    color: #666;
+    color: var(--muted);
     margin-top: 6px;
 }
 
 /* Navigation */
 nav ul {
     list-style: none;
-    padding: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    margin: 16px 0 0;
+    padding: 12px 0 0;
     border-top: 1px solid #ddd;
-    margin-top: 16px;
-    padding-top: 12px;
-    font-family: var(--mono);
+    font-family: var(--head-font);
     font-size: 0.9rem;
 }
 
@@ -88,14 +83,15 @@ nav a {
     font-weight: bold;
 }
 
-nav a:hover {
+nav a:hover,
+nav a.current {
     text-decoration: underline;
     background-color: var(--highlight);
 }
 
 /* Headings */
 .section-head {
-    font-family: var(--mono);
+    font-family: var(--head-font);
     font-size: 1.3rem;
     border-bottom: 1px solid #000;
     padding-bottom: 5px;
@@ -103,16 +99,14 @@ nav a:hover {
 }
 
 .subsection-head {
-    font-family: var(--mono);
+    font-family: var(--head-font);
     font-size: 1.05rem;
     color: var(--accent);
-    margin-top: 26px;
-    margin-bottom: 6px;
+    margin: 26px 0 6px;
 }
 
 /* Body copy */
 p { margin: 0 0 15px; }
-
 a { color: var(--accent); }
 
 main ul,
@@ -123,7 +117,12 @@ main ol {
 
 main li { margin-bottom: 5px; }
 
-/* Publications — serif for readability across a long list */
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* Publications and grants */
 .pub {
     margin: 0 0 14px;
     padding-left: 24px;
@@ -132,23 +131,23 @@ main li { margin-bottom: 5px; }
     line-height: 1.5;
 }
 
-.pub-authors { color: var(--ink); }
-
 .pub-journal {
     font-style: italic;
     color: #444;
 }
 
+.grant-title { font-weight: bold; }
+
 .pub-tag {
     display: inline-block;
-    font-family: var(--mono);
+    font-family: var(--head-font);
     font-size: 0.68rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--accent);
-    background-color: var(--highlight);
-    border: 1px solid var(--accent);
+    color: var(--tag-ink);
+    background-color: var(--tag-bg);
+    border: 1px solid var(--tag-border);
     border-radius: 2px;
     padding: 0 6px;
     margin-left: 6px;
@@ -156,19 +155,15 @@ main li { margin-bottom: 5px; }
     vertical-align: middle;
 }
 
-hr {
-    border: 0;
-    border-top: 1px solid #ccc;
-}
-
-/* Banner image (e.g. lab group photo on the Members page) */
+/* Banner image (lab photo on Members). Crop scales with column width. */
 .banner {
     display: block;
     width: 100%;
-    height: 260px;
+    height: auto;
+    aspect-ratio: 3 / 1;
     object-fit: cover;
     object-position: center;
-    border: 1px solid #bbb;
+    border: var(--frame);
     margin: 0 0 30px;
 }
 
@@ -186,9 +181,8 @@ hr {
 }
 
 .member-info h3 {
-    font-family: var(--mono);
-    margin-top: 0;
-    margin-bottom: 5px;
+    font-family: var(--head-font);
+    margin: 0 0 5px;
     color: #000;
 }
 
@@ -202,29 +196,29 @@ hr {
     color: #444;
 }
 
+.member-photo,
 .member-card .image-placeholder {
     width: 120px;
     height: 150px;
-    flex-shrink: 0;   /* keep every photo box the same size */
-    background-color: #ddd;
+    flex-shrink: 0;   /* same box size regardless of bio length */
     border: 1px solid #666;
+}
+
+.member-photo {
+    display: block;
+    object-fit: cover;
+}
+
+.member-card .image-placeholder {
+    background-color: #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--mono);
+    font-family: var(--head-font);
     font-size: 0.75rem;
     letter-spacing: 1px;
     font-weight: bold;
     color: #888;
-}
-
-.member-photo {
-    width: 120px;
-    height: 150px;
-    flex-shrink: 0;
-    object-fit: cover;
-    border: 1px solid #666;
-    display: block;
 }
 
 /* Footer */
@@ -237,6 +231,17 @@ footer {
 
 /* Responsive */
 @media (max-width: 640px) {
+    body { padding: 8px; }
     #container { padding: 20px; }
     .member-flex { flex-direction: column; }
+}
+
+/* Print: drop chrome so Publications prints as a clean list */
+@media print {
+    body { background: #fff; padding: 0; }
+    #container { border: 0; box-shadow: none; padding: 0; max-width: none; }
+    nav, footer, .banner { display: none; }
+    a { color: inherit; text-decoration: none; }
+    .pub, .member-card { break-inside: avoid; }
+    .section-head, .subsection-head { break-after: avoid; }
 }

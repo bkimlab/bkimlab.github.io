@@ -1,3 +1,8 @@
+---
+title: Home
+subtitle: Computational Biology & Evolutionary Genomics
+description: The Kim Lab at Princeton EEB combines fieldwork, long-read sequencing, and computation to study evolutionary genomics and natural selection.
+---
 # Home
 Welcome to the Kim Lab in the Department of Ecology and Evolutionary Biology at Princeton University.
 

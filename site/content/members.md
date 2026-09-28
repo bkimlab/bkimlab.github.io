@@ -1,3 +1,8 @@
+---
+title: Members
+subtitle: People contributing to the research
+description: Current members of the Kim Lab in Ecology and Evolutionary Biology at Princeton University.
+---
 # Members
 
 ![The Kim Lab](assets/images/DSC02274_1.JPG)

@@ -1,0 +1,15 @@
+/*
+   Theme: classic-refined (default).
+   Mono headings and nav, readable serif body, thin frame, no offset shadow.
+   JetBrains Mono is used only if installed locally; no web-font request.
+*/
+:root {
+    --head-font: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --body-font: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, "Times New Roman", serif;
+    --accent: #0044cc;
+    --highlight: #ffffcc;
+    --paper: #f4f4f2;
+    --ink: #2b2b2b;
+    --frame: 1px solid #bbb;
+    --shadow: none;
+}

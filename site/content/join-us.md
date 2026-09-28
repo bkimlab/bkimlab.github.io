@@ -1,3 +1,8 @@
+---
+title: Join Us
+subtitle: Openings & how to apply
+description: Openings for PhD students, postdocs, and undergraduates in the Kim Lab at Princeton EEB.
+---
 # Join the Lab
 
 The Kim Lab studies evolutionary genomics, comparative genomics, and population genetics in the Department of Ecology and Evolutionary Biology at Princeton University. Our projects run end-to-end—from collecting organisms in the field, to generating long-read sequencing data at the bench, to large-scale computational analysis. We assemble genomes for non-model species, measure natural selection from population genomic data, and study adaptive radiations such as the endemic Hawaiian *Drosophila*, and we aim to be cutting-edge in the field, in the lab, and at the computer.

@@ -1,3 +1,8 @@
+---
+title: Our Research
+subtitle: Computational Biology & Evolutionary Genomics
+description: Clade-scale genomics of Drosophilidae: genome atlases, natural selection at amino-acid resolution, parallel adaptation, and the Hawaiian Drosophila radiation.
+---
 # Research
 
 ## Overview
