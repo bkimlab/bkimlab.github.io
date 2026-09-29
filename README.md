@@ -30,7 +30,6 @@ site/              published directory (GitHub Pages root)
   css/             base.css + one theme file
   assets/images/
   scripts/build.py generator (standard library only)
-grants/            source PDFs, gitignored, never published
 ```
 
 ## One-time GitHub setup
