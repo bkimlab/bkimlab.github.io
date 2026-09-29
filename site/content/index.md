@@ -1,6 +1,6 @@
 ---
 title: Home
-subtitle: Comparative population genomics of Drosophilidae and beyond
+subtitle: Comparative population genomics of Drosophilidae
 description: The Kim Lab at Princeton EEB
 ---
 # Home

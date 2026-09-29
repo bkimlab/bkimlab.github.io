@@ -1,11 +1,11 @@
 ---
 title: Join Us
-subtitle: Openings & how to apply
+subtitle: Comparative population genomics of Drosophilidae
 description: Openings for PhD students, postdocs, and undergraduates in the Kim Lab at Princeton EEB.
 ---
 # Join the Lab
 
-We are always looking for talented, curious, and hardworking people to join us. We welcome applicants with interest or experience in one or more of the following:
+We are always looking for talented, curious, and hard-working people to join us. We welcome applicants with interest or experience in one or more of the following:
 
 * Population, comparative, and evolutionary genomics
 * Genome assembly, variant calling, or other bioinformatics, especially with long-read data

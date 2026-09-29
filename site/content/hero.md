@@ -51,7 +51,7 @@ Fields:
 ## Members
 
 @photo{ set={group}, src={assets/images/group/dsc02274-1.jpg},
-  alt={The lab in lab coats}, ratio={5/2}, focus={50% 60%} }
+  alt={Lab album photo}, ratio={5/2}, focus={50% 60%} }
 
 @photo{ set={group}, src={assets/images/group/20251008-154847.jpg},
   alt={Field collecting selfie}, ratio={5/2}, focus={50% 20%} }
@@ -65,12 +65,11 @@ Fields:
 @photo{ set={group}, src={assets/images/group/dsc01544.jpg},
   alt={Sorting flies under a field microscope}, ratio={5/2}, focus={50% 40%} }
 
-
 @photo{ set={group}, src={assets/images/group/dsc02278.jpg},
   alt={The lab at the bench}, ratio={5/2}, focus={50% 28%} }
 
 @photo{ set={group}, src={assets/images/group/dsc02299.jpg},
-  alt={The lab with the Guyot Hall dinosaur}, ratio={5/2}, focus={50% 45%} }
+  alt={The lab with Ally}, ratio={5/2}, focus={50% 45%} }
 
 ## People (profile photo pools; box is 120x150, so faces must read at that size)
 

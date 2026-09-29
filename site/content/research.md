@@ -1,6 +1,6 @@
 ---
 title: Our Research
-subtitle: Clade-scale genomics of Drosophilidae
+subtitle: Comparative population genomics of Drosophilidae
 description: Clade-scale genomics of Drosophilidae
 ---
 # Research

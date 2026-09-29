@@ -1,6 +1,6 @@
 ---
 title: Publications
-subtitle: Preprints and peer-reviewed research
+subtitle: Comparative population genomics of Drosophilidae
 description: Preprints and peer-reviewed research
 ---
 # Publications
