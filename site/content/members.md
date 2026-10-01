@@ -30,7 +30,7 @@ description: Current members of the Kim Lab in Ecology and Evolutionary Biology 
   photo={assets/images/people/berardi_skyler/dsc01320-2.jpg},
   focus={35% 20%},
   email={skylerberardi [at] princeton -dot- edu},
-  bio={.}
+  bio={Skyler is interested in exploring the properties and genetic basis of adaptation in wild populations. In the lab, she is using comparative population genomic methods to uncover genetic targets of selection among numerous species of Drosophilidae. Her research aims to uncover the extent to which selection on parallel loci underpins adaptive responses to shared environmental conditions on multiple evolutionary timescales.}
 }
 
 ## Graduate Students
